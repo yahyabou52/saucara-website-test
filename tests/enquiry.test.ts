@@ -9,7 +9,7 @@ import {
 const validEnquiry: EnquiryValues = {
   firstName: "Inès",
   occasion: "Mariage ou fiançailles",
-  desiredDate: "2026-12-20",
+  desiredDate: "2099-12-20",
   servings: "80",
   details: "Palette ivoire et vert profond, avec des notes de fleur d’oranger.",
 };

@@ -2,6 +2,13 @@ import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import { ContactForm } from "@/components/contact/contact-form";
+import { getLocalDateInputValue } from "@/lib/enquiry";
+
+function nextYear(): string {
+  const date = new Date();
+  date.setFullYear(date.getFullYear() + 1);
+  return getLocalDateInputValue(date);
+}
 
 function completeForm() {
   fireEvent.change(screen.getByLabelText(/Prénom/), {
@@ -11,7 +18,7 @@ function completeForm() {
     target: { value: "Mariage ou fiançailles" },
   });
   fireEvent.change(screen.getByLabelText("Date souhaitée"), {
-    target: { value: "2026-12-20" },
+    target: { value: nextYear() },
   });
   fireEvent.change(screen.getByLabelText("Nombre de parts"), {
     target: { value: "80" },

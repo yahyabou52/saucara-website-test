@@ -162,7 +162,19 @@ test("supports keyboard navigation, mobile menu, FAQ and enquiry preparation", a
   await page.getByLabel(/Prénom/).fill("Inès");
   await page.getByLabel("Occasion").selectOption("Mariage ou fiançailles");
   const desiredDate = page.getByLabel("Date souhaitée");
-  await expect(desiredDate).toHaveAttribute("min", /^\d{4}-\d{2}-\d{2}$/);
+  const dates = await page.evaluate(() => {
+    const format = (date: Date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    };
+    const future = new Date();
+    future.setFullYear(future.getFullYear() + 1);
+
+    return { today: format(new Date()), future: format(future) };
+  });
+  await expect(desiredDate).toHaveAttribute("min", dates.today);
   await desiredDate.fill("2020-01-01");
   await page.getByLabel("Nombre de parts").fill("80");
   await page
@@ -174,7 +186,7 @@ test("supports keyboard navigation, mobile menu, FAQ and enquiry preparation", a
   );
   await expect(page.getByRole("status")).toHaveCount(0);
 
-  await desiredDate.fill("2099-12-20");
+  await desiredDate.fill(dates.future);
   await page.getByRole("button", { name: "Préparer mon message" }).click();
 
   const ready = page.getByRole("status");
@@ -235,6 +247,18 @@ test("honours reduced motion", async ({ page }) => {
   expect(
     Number.parseFloat(styles.transitionDuration ?? "1"),
   ).toBeLessThanOrEqual(0.01);
+});
+
+test("refreshes the native date minimum after a static build ages", async ({
+  page,
+}) => {
+  await page.clock.install({ time: new Date("2030-01-15T12:00:00Z") });
+  await page.goto("/");
+
+  await expect(page.getByLabel("Date souhaitée")).toHaveAttribute(
+    "min",
+    "2030-01-15",
+  );
 });
 
 test("serves a useful custom 404", async ({ page }) => {

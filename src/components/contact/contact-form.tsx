@@ -4,6 +4,7 @@ import {
   type ChangeEvent,
   type FocusEvent,
   type FormEvent,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -38,11 +39,17 @@ const fieldLabels: Record<EnquiryField, string> = {
 };
 
 export function ContactForm() {
-  const minimumDate = getLocalDateInputValue();
   const [values, setValues] = useState<EnquiryValues>(emptyEnquiry);
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [status, setStatus] = useState<FormStatus>({ name: "idle" });
   const errorSummaryRef = useRef<HTMLDivElement>(null);
+  const desiredDateRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (desiredDateRef.current) {
+      desiredDateRef.current.min = getLocalDateInputValue();
+    }
+  }, []);
 
   const updateValue = (
     event: ChangeEvent<
@@ -190,8 +197,8 @@ export function ContactForm() {
             id="desiredDate"
             name="desiredDate"
             type="date"
+            ref={desiredDateRef}
             required
-            min={minimumDate}
             value={values.desiredDate}
             onChange={updateValue}
             onBlur={validateOnBlur}
