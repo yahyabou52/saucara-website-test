@@ -95,8 +95,20 @@ jobs:
             npm install
           fi
 
+      - name: Check application formatting
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npm run format:check
+
+      - name: Install Playwright Chromium
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npx playwright install --with-deps chromium
+
       - name: Run deterministic quality gate
         run: python3 scripts/quality_gate.py --ci --report agency/state/QUALITY_REPORT.md
+
+      - name: Run browser, responsive, and accessibility tests
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npm run test:e2e
 
       - name: Upload quality report
         if: always()

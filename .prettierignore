@@ -1,0 +1,14 @@
+.next
+node_modules
+coverage
+playwright-report
+test-results
+package-lock.json
+*.woff2
+*.jpg
+*.png
+.agents
+.github/ISSUE_TEMPLATE
+agency
+scripts
+AGENTS.md
