@@ -1279,8 +1279,13 @@ summary {
 
 .site-footer__links a {
   align-items: center;
-  display: inline-flex;
+  display: flex;
   gap: 0.4rem;
+  width: fit-content;
+}
+
+.site-footer__links a + a {
+  margin-top: 0.75rem;
 }
 
 .site-footer__bottom {
@@ -1323,6 +1328,10 @@ summary {
 }
 
 @media (min-width: 36rem) {
+  .header-cta__short {
+    display: none;
+  }
+
   .header-cta__long {
     display: inline;
   }

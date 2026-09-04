@@ -91,11 +91,23 @@ test("renders the complete French experience without broken local content", asyn
   for (const link of await whatsappLinks.all()) {
     const href = await link.getAttribute("href");
     expect(href).toMatch(/^https:\/\/wa\.me\/(?:\d+)?\?text=/);
+    const message = new URL(href as string).searchParams.get("text") ?? "";
+    expect(message).toContain("Bonjour SAUCARA");
+    expect(message).toContain("création pâtissière");
+    expect(message).toContain("Casablanca");
   }
 
   await expect(page.locator('meta[property="og:title"]')).toHaveAttribute(
     "content",
     /SAUCARA/,
+  );
+  await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+    "content",
+    "http://localhost:3000",
+  );
+  await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+    "content",
+    /^http:\/\/localhost:3000\/opengraph-image/,
   );
   await expect(page.locator('link[rel="icon"]')).toHaveCount(1);
   expect(
@@ -149,11 +161,20 @@ test("supports keyboard navigation, mobile menu, FAQ and enquiry preparation", a
 
   await page.getByLabel(/Prénom/).fill("Inès");
   await page.getByLabel("Occasion").selectOption("Mariage ou fiançailles");
-  await page.getByLabel("Date souhaitée").fill("2026-12-20");
+  const desiredDate = page.getByLabel("Date souhaitée");
+  await expect(desiredDate).toHaveAttribute("min", /^\d{4}-\d{2}-\d{2}$/);
+  await desiredDate.fill("2020-01-01");
   await page.getByLabel("Nombre de parts").fill("80");
   await page
     .getByLabel("Votre idée")
     .fill("Palette ivoire et vert profond, avec une note de fleur d’oranger.");
+  await page.getByRole("button", { name: "Préparer mon message" }).click();
+  await expect(page.locator("#desiredDate-error")).toContainText(
+    "date à partir d’aujourd’hui",
+  );
+  await expect(page.getByRole("status")).toHaveCount(0);
+
+  await desiredDate.fill("2099-12-20");
   await page.getByRole("button", { name: "Préparer mon message" }).click();
 
   const ready = page.getByRole("status");

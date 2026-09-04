@@ -14,29 +14,29 @@
 
 ### Completed
 
-- 
+-
 
 ### Intentionally excluded
 
-- 
+-
 
 ## What changed and why
 
-- 
+-
 
 ## Evidence
 
-| Gate | Result | Command / evidence |
-| --- | --- | --- |
-| Lint | | |
-| Type check | | |
-| Tests | | |
-| Build | | |
-| Browser/device QA | | |
-| Accessibility | | |
-| Security | | |
-| Performance | | |
-| Independent review | | |
+| Gate               | Result | Command / evidence |
+| ------------------ | ------ | ------------------ |
+| Lint               |        |                    |
+| Type check         |        |                    |
+| Tests              |        |                    |
+| Build              |        |                    |
+| Browser/device QA  |        |                    |
+| Accessibility      |        |                    |
+| Security           |        |                    |
+| Performance        |        |                    |
+| Independent review |        |                    |
 
 ## Screenshots / recordings
 
@@ -44,7 +44,7 @@
 
 ## Decisions and assumptions
 
-- 
+-
 
 ## Migration, compatibility, and rollback
 
@@ -54,7 +54,7 @@
 
 ## Risk and exceptions
 
-- 
+-
 
 ## External activity declaration
 

@@ -1,11 +1,14 @@
 import { ArrowUpRightIcon } from "@/components/icons";
 import { navigation } from "@/content/site";
+import { getDefaultWhatsAppUrl } from "@/lib/whatsapp";
 
 type SiteFooterProps = {
   linkPrefix?: string;
 };
 
 export function SiteFooter({ linkPrefix = "" }: SiteFooterProps) {
+  const whatsappUrl = getDefaultWhatsAppUrl();
+
   return (
     <footer className="site-footer">
       <div className="container-shell">
@@ -35,6 +38,11 @@ export function SiteFooter({ linkPrefix = "" }: SiteFooterProps) {
 
           <div className="site-footer__links">
             <p>Instagram : compte de démonstration à renseigner</p>
+            <a href={whatsappUrl} target="_blank" rel="noreferrer">
+              WhatsApp — écrire à SAUCARA
+              <ArrowUpRightIcon className="size-4" />
+              <span className="sr-only"> — ouvre un nouvel onglet</span>
+            </a>
             <a href={`${linkPrefix}#confidentialite`}>
               Confidentialité
               <ArrowUpRightIcon className="size-4" />

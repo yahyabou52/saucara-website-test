@@ -36,8 +36,8 @@ export function SiteHeader({ linkPrefix = "" }: SiteHeaderProps) {
           target="_blank"
           rel="noreferrer"
         >
-          Demander
-          <span className="header-cta__long"> sur WhatsApp</span>
+          <span className="header-cta__short">WhatsApp</span>
+          <span className="header-cta__long">Demander sur WhatsApp</span>
           <span className="sr-only"> — ouvre un nouvel onglet</span>
         </a>
 

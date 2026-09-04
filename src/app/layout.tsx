@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import type { ReactNode } from "react";
 
+import { resolveSiteUrl } from "@/lib/site-url";
+
 import "./globals.css";
 
 const manrope = localFont({
@@ -35,6 +37,7 @@ const description =
   "Prototype de site pour SAUCARA, studio pâtissier fictif à Casablanca : gâteaux personnalisés et douceurs de réception.";
 
 export const metadata: Metadata = {
+  metadataBase: resolveSiteUrl(),
   title,
   description,
   applicationName: "SAUCARA",
@@ -45,6 +48,9 @@ export const metadata: Metadata = {
     "SAUCARA",
   ],
   authors: [{ name: "SAUCARA — projet de démonstration" }],
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: false,
     follow: false,
@@ -59,6 +65,7 @@ export const metadata: Metadata = {
     title,
     description,
     siteName: "SAUCARA",
+    url: "/",
   },
   twitter: {
     card: "summary_large_image",

@@ -30,6 +30,8 @@ The project self-hosts the Latin WOFF2 subsets served by the Google Fonts API on
 
 Static Newsreader faces are used instead of the much larger variable files. This preserves the editorial roman/italic contrast while reducing the initial local font payload by roughly 226 KB.
 
+The required copyright notices and full SIL Open Font License 1.1 terms are bundled beside the font files in `LICENSE-Manrope.txt` and `LICENSE-Newsreader.txt`. Those notices come from the corresponding family directories in the official [Google Fonts repository](https://github.com/google/fonts/tree/main/ofl).
+
 ## Local brand assets
 
 - `src/app/icon.svg` and the Open Graph artwork are original geometric SAUCARA demo marks created for this repository.

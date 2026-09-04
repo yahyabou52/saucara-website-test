@@ -24,6 +24,8 @@ NEXT_PUBLIC_WHATSAPP_NUMBER=212600000000 npm run dev
 
 N’utiliser qu’un numéro autorisé, au format international sans `+`, espace ni ponctuation.
 
+`NEXT_PUBLIC_SITE_URL` définit l’origine canonique des métadonnées et vaut `http://localhost:3000` dans l’exemple local. Avant toute mise en ligne, la remplacer par l’URL HTTPS réellement approuvée ; les valeurs invalides reviennent sans erreur au fallback local.
+
 ## Contrôles qualité
 
 ```bash
@@ -38,7 +40,7 @@ python3 scripts/validate_agency.py
 python3 scripts/quality_gate.py --ci --report agency/state/QUALITY_REPORT.md
 ```
 
-Le build utilise Webpack explicitement : le bac à sable de ce projet interdit le port interne utilisé par Turbopack pendant PostCSS. Le type checking reste exécuté séparément et dans le build.
+Le build utilise Webpack explicitement : le bac à sable de ce projet interdit le port interne utilisé par Turbopack pendant PostCSS. Le script de type checking régénère d’abord les déclarations Next avec `next typegen`, puis exécute TypeScript ; le build conserve aussi son propre contrôle.
 
 ## Architecture
 

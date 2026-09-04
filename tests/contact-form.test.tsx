@@ -67,6 +67,25 @@ describe("ContactForm", () => {
     );
   });
 
+  it("rejects a past date before preparing a message", () => {
+    render(<ContactForm />);
+    completeForm();
+    fireEvent.change(screen.getByLabelText("Date souhaitée"), {
+      target: { value: "2020-01-01" },
+    });
+
+    fireEvent.click(
+      screen.getByRole("button", { name: "Préparer mon message" }),
+    );
+
+    expect(
+      screen.getByText(/date à partir d’aujourd’hui/, {
+        selector: "#desiredDate-error",
+      }),
+    ).toBeVisible();
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+  });
+
   it("has no first-party submission action or persistence contract", () => {
     const { container } = render(<ContactForm />);
     const form = container.querySelector("form");

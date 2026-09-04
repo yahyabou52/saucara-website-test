@@ -12,6 +12,7 @@ import { ArrowUpRightIcon, CheckIcon } from "@/components/icons";
 import {
   buildEnquiryMessage,
   emptyEnquiry,
+  getLocalDateInputValue,
   type EnquiryErrors,
   type EnquiryField,
   type EnquiryValues,
@@ -37,6 +38,7 @@ const fieldLabels: Record<EnquiryField, string> = {
 };
 
 export function ContactForm() {
+  const minimumDate = getLocalDateInputValue();
   const [values, setValues] = useState<EnquiryValues>(emptyEnquiry);
   const [errors, setErrors] = useState<EnquiryErrors>({});
   const [status, setStatus] = useState<FormStatus>({ name: "idle" });
@@ -189,13 +191,12 @@ export function ContactForm() {
             name="desiredDate"
             type="date"
             required
+            min={minimumDate}
             value={values.desiredDate}
             onChange={updateValue}
             onBlur={validateOnBlur}
             aria-invalid={Boolean(errors.desiredDate)}
-            aria-describedby={
-              errors.desiredDate ? "desiredDate-error" : "desiredDate-help"
-            }
+            aria-describedby={`desiredDate-help${errors.desiredDate ? " desiredDate-error" : ""}`}
           />
           <p id="desiredDate-help" className="field-help">
             La disponibilité sera confirmée sur WhatsApp.

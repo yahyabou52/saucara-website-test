@@ -34,17 +34,35 @@ describe("validateEnquiry", () => {
   });
 
   it("accepts a complete request", () => {
-    expect(validateEnquiry(validEnquiry)).toEqual({});
+    expect(validateEnquiry(validEnquiry, "2026-09-04")).toEqual({});
+  });
+
+  it("rejects past and impossible calendar dates", () => {
+    expect(
+      validateEnquiry(
+        { ...validEnquiry, desiredDate: "2026-09-03" },
+        "2026-09-04",
+      ).desiredDate,
+    ).toBe("Choisissez une date à partir d’aujourd’hui.");
+    expect(
+      validateEnquiry(
+        { ...validEnquiry, desiredDate: "2026-02-30" },
+        "2026-01-01",
+      ).desiredDate,
+    ).toBe("Indiquez la date souhaitée.");
   });
 
   it("rejects unsupported occasions and unreasonable text values", () => {
-    const errors = validateEnquiry({
-      ...validEnquiry,
-      firstName: "A".repeat(61),
-      occasion: "Urgent",
-      servings: "-2",
-      details: "x".repeat(601),
-    });
+    const errors = validateEnquiry(
+      {
+        ...validEnquiry,
+        firstName: "A".repeat(61),
+        occasion: "Urgent",
+        servings: "-2",
+        details: "x".repeat(601),
+      },
+      "2026-09-04",
+    );
 
     expect(errors.firstName).toBeDefined();
     expect(errors.occasion).toBeDefined();

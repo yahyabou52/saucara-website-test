@@ -23,6 +23,27 @@ export type EnquiryErrors = Partial<Record<EnquiryField, string>>;
 const isoDatePattern = /^\d{4}-\d{2}-\d{2}$/;
 const servingsPattern = /^\d{1,4}$/;
 
+export function getLocalDateInputValue(date = new Date()): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
+
+function isValidIsoDate(value: string): boolean {
+  if (!isoDatePattern.test(value)) return false;
+
+  const [year, month, day] = value.split("-").map(Number);
+  const parsed = new Date(Date.UTC(year, month - 1, day));
+
+  return (
+    parsed.getUTCFullYear() === year &&
+    parsed.getUTCMonth() === month - 1 &&
+    parsed.getUTCDate() === day
+  );
+}
+
 export const emptyEnquiry: EnquiryValues = {
   firstName: "",
   occasion: "",
@@ -31,7 +52,10 @@ export const emptyEnquiry: EnquiryValues = {
   details: "",
 };
 
-export function validateEnquiry(values: EnquiryValues): EnquiryErrors {
+export function validateEnquiry(
+  values: EnquiryValues,
+  minimumDate = getLocalDateInputValue(),
+): EnquiryErrors {
   const errors: EnquiryErrors = {};
   const firstName = values.firstName.trim();
   const details = values.details.trim();
@@ -44,8 +68,10 @@ export function validateEnquiry(values: EnquiryValues): EnquiryErrors {
     errors.occasion = "Choisissez l’occasion qui correspond à votre projet.";
   }
 
-  if (!isoDatePattern.test(values.desiredDate)) {
+  if (!isValidIsoDate(values.desiredDate)) {
     errors.desiredDate = "Indiquez la date souhaitée.";
+  } else if (values.desiredDate < minimumDate) {
+    errors.desiredDate = "Choisissez une date à partir d’aujourd’hui.";
   }
 
   if (!servingsPattern.test(values.servings) || Number(values.servings) < 1) {
