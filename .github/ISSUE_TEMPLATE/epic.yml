@@ -1,0 +1,75 @@
+name: Agency epic
+description: Define one owner-visible milestone for the Codex web agency.
+title: "[EPIC] "
+labels:
+  - agency
+  - epic
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use one epic for one owner-visible outcome. Child tasks must have independent acceptance criteria.
+  - type: textarea
+    id: owner_outcome
+    attributes:
+      label: Owner outcome
+      description: What should the owner be able to see, use, or approve?
+      placeholder: Deliver...
+    validations:
+      required: true
+  - type: textarea
+    id: users_and_journey
+    attributes:
+      label: Users and critical journey
+      description: Who is this for, and what is the most important end-to-end flow?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: In scope
+      description: List the required outcomes and systems.
+    validations:
+      required: true
+  - type: textarea
+    id: non_goals
+    attributes:
+      label: Non-goals
+      description: State what the agency must not silently add or replace.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Use objective, testable checkboxes.
+      placeholder: |
+        - [ ] A visitor can...
+        - [ ] The build passes...
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and references
+      description: Brand, stack, data, compliance, performance, accessibility, timeline, or reference constraints.
+    validations:
+      required: false
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Highest expected risk
+      options:
+        - low
+        - medium
+        - high
+        - critical
+    validations:
+      required: true
+  - type: checkboxes
+    id: owner_gate
+    attributes:
+      label: Owner authority
+      options:
+        - label: Production release requires a separate explicit owner approval.
+          required: true

@@ -1,0 +1,56 @@
+name: Agency bug
+description: Record a reproduced failure with regression-proof acceptance criteria.
+title: "[BUG] "
+labels:
+  - agency
+  - bug
+body:
+  - type: textarea
+    id: observed
+    attributes:
+      label: Observed behavior
+      description: What actually happens? Include exact user impact.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction steps
+      placeholder: |
+        1. Open...
+        2. Click...
+        3. Observe...
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment and evidence
+      description: Branch/SHA, browser/device, test data, logs, screenshots, console/network details.
+    validations:
+      required: true
+  - type: textarea
+    id: regression
+    attributes:
+      label: Regression test and acceptance
+      description: State how the failure will be proven before and after the fix.
+    validations:
+      required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      options:
+        - blocker
+        - critical
+        - high
+        - medium
+        - low
+    validations:
+      required: true

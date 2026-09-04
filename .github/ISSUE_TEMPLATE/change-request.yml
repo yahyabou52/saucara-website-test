@@ -1,0 +1,43 @@
+name: Owner change request
+description: Record owner feedback against a delivery packet for correction, redesign, or reset.
+title: "[REWORK] "
+labels:
+  - agency
+  - rework
+body:
+  - type: input
+    id: delivery
+    attributes:
+      label: Delivery or pull-request reference
+    validations:
+      required: true
+  - type: dropdown
+    id: verdict
+    attributes:
+      label: Owner verdict
+      options:
+        - REQUEST_CHANGES
+        - REJECT_AND_RETHINK
+    validations:
+      required: true
+  - type: textarea
+    id: feedback
+    attributes:
+      label: Exact feedback
+      description: What feels wrong, fails the goal, or must change?
+    validations:
+      required: true
+  - type: textarea
+    id: preserve
+    attributes:
+      label: Accepted elements to preserve
+      description: List anything the agency must not discard.
+    validations:
+      required: false
+  - type: textarea
+    id: proof
+    attributes:
+      label: What would make the new result acceptable?
+      description: Optional owner-visible acceptance evidence.
+    validations:
+      required: false

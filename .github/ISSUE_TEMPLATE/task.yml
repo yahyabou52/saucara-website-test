@@ -1,0 +1,76 @@
+name: Agency task
+description: Create an independently verifiable child task for an agency epic.
+title: "[TASK] "
+labels:
+  - agency
+  - task
+body:
+  - type: input
+    id: task_id
+    attributes:
+      label: Stable agency task ID
+      placeholder: TASK-001
+    validations:
+      required: true
+  - type: input
+    id: parent
+    attributes:
+      label: Parent epic
+      placeholder: "#123 or EPIC-001"
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: Why this task exists and which owner outcome it advances.
+    validations:
+      required: true
+  - type: input
+    id: owner_agent
+    attributes:
+      label: Accountable agency role
+      placeholder: frontend_engineer
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies
+      description: Stable task IDs or issue references. Write "none" when independent.
+    validations:
+      required: true
+  - type: textarea
+    id: boundaries
+    attributes:
+      label: Ownership boundaries
+      description: Affected paths, interfaces, schemas, or systems; include protected/unrelated areas.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      placeholder: |
+        - [ ] Observable result one
+        - [ ] Observable result two
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Exact automated commands and manual/browser flows.
+    validations:
+      required: true
+  - type: dropdown
+    id: risk
+    attributes:
+      label: Risk
+      options:
+        - low
+        - medium
+        - high
+        - critical
+    validations:
+      required: true

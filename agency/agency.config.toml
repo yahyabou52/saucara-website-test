@@ -1,0 +1,86 @@
+schema_version = 1
+
+[agency]
+name = "Codex Web Agency"
+owner = "SAUCARA project owner"
+mode = "owner_release" # advisory | supervised | owner_release | custom
+default_stack = "detect"
+
+[autonomy]
+proceed_on_reversible_decisions = true
+ask_routine_questions = false
+max_internal_rework_cycles = 2
+max_parallel_read_agents = 5
+max_parallel_write_agents = 1
+minimum_confidence_to_proceed = 0.70
+preserve_unrelated_changes = true
+
+[approvals]
+required_for_scope_expansion = true
+required_for_paid_services = true
+required_for_secret_or_permission_changes = true
+required_for_destructive_data_changes = true
+required_for_security_control_weakening = true
+required_for_external_messages_or_legal_claims = true
+required_for_production_release = true
+required_for_protected_branch_merge = true
+
+[github]
+mode = "dry-run" # dry-run | manage-issues | custom
+repository = "yahyabou52/saucara-website-test"
+project_url = "" # optional; configure GitHub Project auto-add separately
+allow_label_management = false
+allow_issue_create = false
+allow_issue_update = false
+allow_issue_close = false
+allow_project_status_update = false
+allow_branch_create = true
+allow_commit = true
+allow_push = false
+allow_pull_request_create = false
+allow_pull_request_update = false
+allow_merge = false
+allow_release_create = false
+
+[deployment]
+allow_preview_deploy = false
+allow_production_deploy = false
+require_owner_release_token = true
+
+[release]
+candidate_approval_phrase = "APPROVE CANDIDATE"
+production_approval_prefix = "APPROVE RELEASE:"
+require_exact_candidate_reference = true
+
+[quality]
+required_capabilities = [
+  "lint",
+  "typecheck",
+  "test",
+  "build",
+  "browser_qa",
+  "accessibility_review",
+  "independent_review",
+]
+allow_documented_exceptions = true
+fail_on_unresolved_blocker = true
+fail_on_unresolved_critical = true
+require_real_browser_for_ui = true
+require_security_review_for_sensitive_changes = true
+require_performance_review_for_performance_sensitive_changes = true
+
+[quality.script_aliases]
+lint = ["lint"]
+typecheck = ["typecheck", "type-check", "check:types", "check"]
+test = ["test", "test:ci"]
+build = ["build"]
+
+[records]
+project_charter = "agency/state/PROJECT_CHARTER.md"
+assumptions = "agency/state/ASSUMPTIONS.md"
+decisions = "agency/state/DECISIONS.md"
+risks = "agency/state/RISKS.md"
+plan = "agency/state/plan.json"
+quality_report = "agency/state/QUALITY_REPORT.md"
+delivery_packet = "agency/state/DELIVERY_PACKET.md"
+owner_feedback = "agency/state/OWNER_FEEDBACK.md"

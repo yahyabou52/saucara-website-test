@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "epic": {
+    "id": "EPIC-001",
+    "title": "Launch an owner-ready agency website",
+    "objective": "Deliver a responsive, accessible site with a verified lead form",
+    "status": "ready",
+    "labels": [
+      "agency",
+      "epic"
+    ],
+    "github_issue": null
+  },
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Establish content and experience architecture",
+      "objective": "Define page hierarchy, journeys, states, and truthful conversion copy",
+      "owner_agent": "ux_director",
+      "depends_on": [],
+      "affected_paths": [
+        "agency/state"
+      ],
+      "acceptance_criteria": [
+        "Primary audience, promise, CTA, sections, and form states are documented",
+        "No invented proof or unsupported claims are included"
+      ],
+      "verification": [
+        "Independent product and UX review against the owner brief"
+      ],
+      "risk": "low",
+      "status": "ready",
+      "labels": [
+        "agency",
+        "task",
+        "area:design",
+        "priority:p1"
+      ],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-002",
+      "title": "Implement the responsive production page",
+      "objective": "Build the approved experience in the detected web stack",
+      "owner_agent": "frontend_engineer",
+      "depends_on": [
+        "TASK-001"
+      ],
+      "affected_paths": [
+        "app",
+        "src",
+        "public"
+      ],
+      "acceptance_criteria": [
+        "Core content and CTA are usable from 360 px through large desktop",
+        "Lead form exposes validated success and error states",
+        "Keyboard focus and reduced-motion behavior are supported"
+      ],
+      "verification": [
+        "Project lint, typecheck, tests, build, and real-browser QA"
+      ],
+      "risk": "medium",
+      "status": "blocked",
+      "labels": [
+        "agency",
+        "task",
+        "area:frontend",
+        "priority:p0"
+      ],
+      "github_issue": null
+    }
+  ]
+}

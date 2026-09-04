@@ -1,0 +1,226 @@
+{
+  "schema_version": 1,
+  "epic": {
+    "id": "EPIC-001",
+    "title": "Deliver the SAUCARA WhatsApp-first pastry website",
+    "objective": "Create an owner-review-ready French one-page experience that presents premium custom pastry work and prepares qualified WhatsApp enquiries.",
+    "status": "done",
+    "labels": ["agency", "epic", "area:website"],
+    "github_issue": null
+  },
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "title": "Install and validate Agency OS",
+      "objective": "Establish the governed owner-release workflow in the target repository without overwriting the initial project.",
+      "owner_agent": "agency_lead",
+      "depends_on": [],
+      "affected_paths": [
+        "AGENTS.md",
+        ".agents",
+        ".codex",
+        ".github",
+        "agency",
+        "scripts"
+      ],
+      "acceptance_criteria": [
+        "Official installer dry-run is reviewed before apply",
+        "All installed skills and agents validate",
+        "Setup is isolated in its own commit"
+      ],
+      "verification": [
+        "python3 scripts/validate_agency.py",
+        "python3 -m unittest discover -s tests -v",
+        "git show --stat fef9135"
+      ],
+      "risk": "low",
+      "status": "done",
+      "labels": ["agency", "task", "area:operations", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-002",
+      "title": "Define product and conversion strategy",
+      "objective": "Turn the brief into a truthful WhatsApp-first proposition, CTA hierarchy, objection plan, and measurable outcomes.",
+      "owner_agent": "product_strategist",
+      "depends_on": ["TASK-001"],
+      "affected_paths": [
+        "agency/state/PROJECT_CHARTER.md",
+        "agency/state/ASSUMPTIONS.md",
+        "agency/state/RISKS.md"
+      ],
+      "acceptance_criteria": [
+        "Primary audiences, job, funnel, CTA language, form friction, and demo boundaries are explicit",
+        "No unsupported proof or confirmation claim is planned"
+      ],
+      "verification": [
+        "Read-only product and conversion specialist review against the owner brief"
+      ],
+      "risk": "low",
+      "status": "done",
+      "labels": ["agency", "task", "area:strategy", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-003",
+      "title": "Specify UX and French content architecture",
+      "objective": "Define the one-page hierarchy, user journeys, complete French content, responsive behavior, and interaction states.",
+      "owner_agent": "ux_director",
+      "depends_on": ["TASK-002"],
+      "affected_paths": [
+        "agency/state/PROJECT_CHARTER.md",
+        "src/content/site.ts"
+      ],
+      "acceptance_criteria": [
+        "All required sections and FAQ topics map to a coherent information hierarchy",
+        "Menu, FAQ, form, keyboard, focus, and reduced-motion states are testable"
+      ],
+      "verification": [
+        "Read-only UX review",
+        "Content invariant tests and browser journey review"
+      ],
+      "risk": "medium",
+      "status": "done",
+      "labels": ["agency", "task", "area:ux", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-004",
+      "title": "Establish visual system and licensed assets",
+      "objective": "Create a distinctive accessible Casablanca editorial direction and a documented local photography set.",
+      "owner_agent": "visual_design_director",
+      "depends_on": ["TASK-003"],
+      "affected_paths": [
+        "design-system/saucara/MASTER.md",
+        "public/images",
+        "src/assets",
+        "docs/ASSETS.md"
+      ],
+      "acceptance_criteria": [
+        "Green/cream/gold tokens, typography, editorial grid, and Cadre Casablanca device are documented",
+        "Every external asset is local, optimized, sourced, and visibly treated as demo imagery"
+      ],
+      "verification": [
+        "Visual director review",
+        "Image dimension/size audit",
+        "Desktop and mobile screenshot comparison"
+      ],
+      "risk": "medium",
+      "status": "done",
+      "labels": ["agency", "task", "area:design", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-005",
+      "title": "Scaffold the static-first Next.js application",
+      "objective": "Provide a strict, maintainable App Router foundation with quality tooling and minimal runtime dependencies.",
+      "owner_agent": "solution_architect",
+      "depends_on": ["TASK-001", "TASK-003"],
+      "affected_paths": [
+        "package.json",
+        "package-lock.json",
+        "next.config.ts",
+        "tsconfig.json",
+        "src/app",
+        "eslint.config.mjs",
+        "vitest.config.ts",
+        "playwright.config.ts"
+      ],
+      "acceptance_criteria": [
+        "Current compatible versions are verified and locked",
+        "Server/client boundaries, metadata, 404, tests, formatting, lint, typecheck, build, and E2E scripts are configured"
+      ],
+      "verification": [
+        "npm run format:check",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run test",
+        "npm run build"
+      ],
+      "risk": "medium",
+      "status": "done",
+      "labels": ["agency", "task", "area:architecture", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-006",
+      "title": "Implement the responsive one-page experience",
+      "objective": "Build every required section, local-image composition, navigation, metadata, and branded 404 in natural French.",
+      "owner_agent": "frontend_engineer",
+      "depends_on": ["TASK-004", "TASK-005"],
+      "affected_paths": [
+        "src/app",
+        "src/components",
+        "src/content",
+        "src/lib",
+        "public"
+      ],
+      "acceptance_criteria": [
+        "All owner-required sections and content are present",
+        "Layouts work from 320px through wide desktop with semantic HTML, visible focus, reduced motion, and no overflow",
+        "All links and local images resolve"
+      ],
+      "verification": [
+        "Automated content tests",
+        "Production build",
+        "Playwright responsive screenshots and navigation tests"
+      ],
+      "risk": "medium",
+      "status": "done",
+      "labels": ["agency", "task", "area:frontend", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-007",
+      "title": "Implement WhatsApp, form, menu, and test coverage",
+      "objective": "Make the conversion interactions robust, accessible, privacy-preserving, and independently reproducible.",
+      "owner_agent": "test_engineer",
+      "depends_on": ["TASK-006"],
+      "affected_paths": [
+        "src/components/contact",
+        "src/components/layout",
+        "src/lib",
+        "tests",
+        "e2e"
+      ],
+      "acceptance_criteria": [
+        "Form exposes invalid, prepared, and recoverable failure states without storage or submission",
+        "Mobile menu and FAQ work by keyboard",
+        "WhatsApp URL encoding and demo fallback are tested",
+        "Critical journey E2E tests include axe, console, overflow, links, images, and reduced motion"
+      ],
+      "verification": ["npm run test", "npm run test:e2e"],
+      "risk": "high",
+      "status": "done",
+      "labels": ["agency", "task", "area:testing", "priority:p0"],
+      "github_issue": null
+    },
+    {
+      "id": "TASK-008",
+      "title": "Run independent quality board and owner handoff",
+      "objective": "Verify the stable candidate, correct bounded defects, and provide one evidence-based owner delivery packet.",
+      "owner_agent": "independent_reviewer",
+      "depends_on": ["TASK-007"],
+      "affected_paths": [
+        "agency/state/QUALITY_REPORT.md",
+        "agency/state/DELIVERY_PACKET.md",
+        "README.md",
+        "docs"
+      ],
+      "acceptance_criteria": [
+        "Formatting, lint, typecheck, tests, build, browser QA, accessibility, performance, and independent review pass or have explicit bounded exceptions",
+        "Desktop/mobile screenshots and exact local run steps are recorded",
+        "No deploy, push, PR, merge, or release occurs"
+      ],
+      "verification": [
+        "python3 scripts/quality_gate.py --ci --report agency/state/QUALITY_REPORT.md",
+        "Independent QA/accessibility/performance/code review verdicts",
+        "git status and log audit"
+      ],
+      "risk": "medium",
+      "status": "done",
+      "labels": ["agency", "task", "area:quality", "priority:p0"],
+      "github_issue": null
+    }
+  ]
+}

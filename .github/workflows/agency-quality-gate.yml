@@ -1,0 +1,120 @@
+name: Agency quality gate
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agency-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  package:
+    name: Validate agency package
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Show Python version
+        run: python3 --version
+
+      - name: Validate agency structure
+        run: python3 scripts/validate_agency.py
+
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v
+
+      - name: Compile Python scripts
+        run: python3 -m compileall -q scripts tests
+
+  project-quality:
+    name: Run project quality capabilities
+    needs: package
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Select Node.js version
+        if: ${{ hashFiles('package.json') != '' }}
+        id: node
+        shell: bash
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          from pathlib import Path
+
+          for candidate in (Path('.nvmrc'), Path('.node-version')):
+              if candidate.exists() and candidate.read_text(encoding='utf-8').strip():
+                  print('version=' + candidate.read_text(encoding='utf-8').strip())
+                  break
+          else:
+              package = json.loads(Path('package.json').read_text(encoding='utf-8'))
+              print('version=' + package.get('engines', {}).get('node', '24'))
+          PY
+
+      - name: Set up Node.js
+        if: ${{ hashFiles('package.json') != '' }}
+        uses: actions/setup-node@v7
+        with:
+          node-version: ${{ steps.node.outputs.version }}
+          package-manager-cache: false
+
+      - name: Install JavaScript dependencies
+        if: ${{ hashFiles('package.json') != '' }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ -f pnpm-lock.yaml ]]; then
+            corepack enable
+            pnpm install --frozen-lockfile
+          elif [[ -f yarn.lock ]]; then
+            corepack enable
+            yarn install --immutable || yarn install --frozen-lockfile
+          elif [[ -f bun.lock || -f bun.lockb ]]; then
+            echo "Bun project detected. Add the official Bun setup action before enabling this workflow."
+            exit 2
+          elif [[ -f package-lock.json || -f npm-shrinkwrap.json ]]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Check application formatting
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npm run format:check
+
+      - name: Install Playwright Chromium
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npx playwright install --with-deps chromium
+
+      - name: Run deterministic quality gate
+        run: python3 scripts/quality_gate.py --ci --report agency/state/QUALITY_REPORT.md
+
+      - name: Run browser, responsive, and accessibility tests
+        if: ${{ hashFiles('package.json') != '' }}
+        run: npm run test:e2e
+
+      - name: Upload quality report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: agency-quality-report-${{ github.run_id }}
+          path: agency/state/QUALITY_REPORT.md
+          if-no-files-found: warn
+          retention-days: 14
