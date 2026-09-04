@@ -1,0 +1,20 @@
+# Dependencies and build output
+node_modules/
+.next/
+out/
+coverage/
+playwright-report/
+test-results/
+
+# Local environment files
+.env*
+!.env.example
+
+# Generated caches and logs
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+
+# Local browser evidence server state
+.vercel/

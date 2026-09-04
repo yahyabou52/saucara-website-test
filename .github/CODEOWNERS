@@ -1,0 +1,11 @@
+# Repository owner and default reviewer
+* @yahyabou52
+
+# High-impact agency behavior
+/.agents/ @yahyabou52
+/.codex/ @yahyabou52
+/agency/agency.config.toml @yahyabou52
+/agency/DECISION_RIGHTS.md @yahyabou52
+/.github/workflows/ @yahyabou52
+/scripts/ @yahyabou52
+/SECURITY.md @yahyabou52

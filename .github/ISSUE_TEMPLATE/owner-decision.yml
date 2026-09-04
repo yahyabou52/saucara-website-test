@@ -1,0 +1,50 @@
+name: Owner decision
+description: Request one approval-gated decision with a recommendation and bounded alternatives.
+title: "[OWNER DECISION] "
+labels:
+  - agency
+  - owner-decision
+  - blocked
+body:
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision required
+      description: State the decision in one sentence.
+    validations:
+      required: true
+  - type: textarea
+    id: why_now
+    attributes:
+      label: Why it is required now
+      description: Explain which approved work is blocked and why no safe reversible default exists.
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Agency recommendation
+      description: Recommend one option and explain its impact on scope, risk, cost, and rework.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: At most two credible alternatives, including trade-offs.
+    validations:
+      required: false
+  - type: textarea
+    id: safe_progress
+    attributes:
+      label: Safe work already completed
+      description: State what the agency completed or isolated while waiting.
+    validations:
+      required: true
+  - type: input
+    id: approval_phrase
+    attributes:
+      label: Exact approval phrase or config change
+      placeholder: APPROVE OPTION A
+    validations:
+      required: true
