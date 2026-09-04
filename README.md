@@ -62,6 +62,6 @@ Les textes métier et politiques sont des exemples à valider avant toute utilis
 
 ## Agency OS
 
-L’Agency OS a été installé de façon additive dans ce dépôt cible. Le plan se trouve dans [`agency/state/plan.json`](agency/state/plan.json), les décisions dans [`agency/state/DECISIONS.md`](agency/state/DECISIONS.md), et le rapport qualité dans [`agency/state/QUALITY_REPORT.md`](agency/state/QUALITY_REPORT.md).
+L’Agency OS a été installé de façon additive dans ce dépôt cible. Le plan se trouve dans [`agency/state/plan.json`](agency/state/plan.json), les décisions dans [`agency/state/DECISIONS.md`](agency/state/DECISIONS.md), le rapport qualité dans [`agency/state/QUALITY_REPORT.md`](agency/state/QUALITY_REPORT.md), et le dossier de livraison dans [`agency/state/DELIVERY_PACKET.md`](agency/state/DELIVERY_PACKET.md). Les aperçus validés sont regroupés dans [`docs/evidence`](docs/evidence/README.md).
 
 Branche de travail : `codex/saucara-website`. Aucun déploiement ni merge vers `main` n’est effectué par ce projet.

@@ -52,25 +52,25 @@ Land on the page → understand the custom cake/pastry offer and Casablanca cont
 
 ## Acceptance criteria
 
-- [ ] At 375px and desktop widths, the first view identifies custom cakes/pastries, Casablanca, and a primary WhatsApp action.
-- [ ] Header, hero, five creations, custom service, four request steps, five occasion types, gallery, demo testimonials, six-topic FAQ, contact/form, and footer are complete in natural French.
-- [ ] Every primary CTA produces a tested HTTPS WhatsApp URL with a French prefill and never claims order confirmation.
-- [ ] The form blocks invalid required data, shows linked inline errors and a focusable summary, preserves input, and creates an honest message-ready state without storage or POST requests.
-- [ ] Mobile menu, FAQ, anchors, form, and outbound links are keyboard usable with visible focus and no traps.
-- [ ] Reduced-motion mode disables nonessential transforms, animation, and smooth scrolling while leaving all content available.
-- [ ] All stock imagery is local, loads successfully, has correct dimensions/alt treatment, and is documented as demonstration imagery with source and author.
-- [ ] Testimonials and fictional business details are visibly labeled as demo content; no unsupported claim, metric, award, urgency, exact price, or real-customer implication appears.
-- [ ] Metadata, Open Graph image, favicon, semantic landmarks, French language, demo `noindex`, and custom 404 are present.
-- [ ] No console error, broken internal link, placeholder `href="#"`, image failure, or horizontal overflow occurs at tested widths.
-- [ ] Formatting, Agency validation, Python tests, lint, typecheck, unit/component tests, production build, and Playwright E2E all pass.
-- [ ] Independent QA, accessibility, performance, and implementation reviews permit owner review, with limitations documented.
+- [x] At 375px and desktop widths, the first view identifies custom cakes/pastries, Casablanca, and a primary WhatsApp action.
+- [x] Header, hero, five creations, custom service, four request steps, five occasion types, gallery, demo testimonials, six-topic FAQ, contact/form, and footer are complete in natural French.
+- [x] Every primary CTA produces a tested HTTPS WhatsApp URL with a French prefill and never claims order confirmation.
+- [x] The form blocks invalid required data, shows linked inline errors and a focusable summary, preserves input, and creates an honest message-ready state without storage or POST requests.
+- [x] Mobile menu, FAQ, anchors, form, and outbound links are keyboard usable with visible focus and no traps.
+- [x] Reduced-motion mode disables nonessential transforms, animation, and smooth scrolling while leaving all content available.
+- [x] All stock imagery is local, loads successfully, has correct dimensions/alt treatment, and is documented as demonstration imagery with source and author.
+- [x] Testimonials and fictional business details are visibly labeled as demo content; no unsupported claim, metric, award, urgency, exact price, or real-customer implication appears.
+- [x] Metadata, Open Graph image, favicon, semantic landmarks, French language, demo `noindex`, and custom 404 are present.
+- [x] No console error, broken internal link, placeholder `href="#"`, image failure, or horizontal overflow occurs at tested widths.
+- [x] Formatting, Agency validation, Python tests, lint, typecheck, unit/component tests, production build, and Playwright E2E all pass.
+- [x] Independent QA, accessibility, performance, and implementation reviews permit owner review, with limitations documented.
 
 ## Definition of done
 
-- [ ] Every acceptance criterion is verified.
-- [ ] Required quality gates pass or owner-visible exceptions are documented.
-- [ ] Delivery packet is complete.
-- [ ] No approval-gated action is implied as completed.
+- [x] Every acceptance criterion is verified.
+- [x] Required quality gates pass or owner-visible exceptions are documented.
+- [x] Delivery packet is complete.
+- [x] No approval-gated action is implied as completed.
 
 ## Owner decisions required
 

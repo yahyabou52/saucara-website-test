@@ -79,11 +79,11 @@ Record material product, design, architecture, routing, and operational decision
 - **Date:** 2026-09-04
 - **Status:** accepted
 - **Context:** Turbopack tries to bind an internal port while processing PostCSS, an operation denied by this execution container. Next's experimental TypeScript CLI path also exits successfully but loses its captured `--showConfig` output in the same environment.
-- **Decision:** Run `next build --webpack` and explicitly disable `experimental.useTypeScriptCli` for reproducible builds in this repository.
+- **Decision:** Run `next build --webpack`, explicitly disable `experimental.useTypeScriptCli`, and generate Next route declarations before standalone TypeScript checking for reproducible builds in this repository.
 - **Alternatives:** Disable type checking; accept a permanently failing build; patch framework internals.
 - **Consequences:** The project keeps Next.js App Router, Tailwind, and full type checking (`tsc --noEmit` plus the compiler API check inside the build) without weakening a quality rule. Development may still use Next's default engine.
 - **Reversibility:** High; remove the two settings when the execution environment supports the default paths reliably.
-- **Evidence:** Two Turbopack runs failed on internal port binding; the CLI runner returned code 0 with empty stdout; the Webpack/compiler-API build completed all six static routes.
+- **Evidence:** Two Turbopack runs failed on internal port binding; the CLI runner returned code 0 with empty stdout; `next typegen && tsc --noEmit` and the Webpack/compiler-API build completed successfully across all six static routes.
 - **Owner approval required:** no.
 
 ## Template

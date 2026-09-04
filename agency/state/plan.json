@@ -4,7 +4,7 @@
     "id": "EPIC-001",
     "title": "Deliver the SAUCARA WhatsApp-first pastry website",
     "objective": "Create an owner-review-ready French one-page experience that presents premium custom pastry work and prepares qualified WhatsApp enquiries.",
-    "status": "in_progress",
+    "status": "done",
     "labels": ["agency", "epic", "area:website"],
     "github_issue": null
   },
@@ -218,7 +218,7 @@
         "git status and log audit"
       ],
       "risk": "medium",
-      "status": "in_progress",
+      "status": "done",
       "labels": ["agency", "task", "area:quality", "priority:p0"],
       "github_issue": null
     }
